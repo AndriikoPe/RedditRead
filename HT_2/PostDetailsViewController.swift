@@ -12,6 +12,7 @@ class PostDetailsViewController: UIViewController {
     // MARK: - Data.
     var postsProvider = PostsProvider.shared
     var post: Post?
+    private var supplementaryView: UIView?
     
     // MARK: - Outlets.
     @IBOutlet private weak var detailsLabel: UILabel!
@@ -54,7 +55,7 @@ class PostDetailsViewController: UIViewController {
         DispatchQueue.main.async {
             self.setImage(using: post.imageUrl)
             
-            self.detailsLabel.text = self
+            self.detailsLabel.text = UtilityFuncs
                 .details(from: post.author, UtilityFuncs.convertToNice(post.time), post.domain)
             self.detailsLabel.sizeToFit()
             
@@ -91,10 +92,46 @@ class PostDetailsViewController: UIViewController {
         let ratio = image.size.width / image.size.height
         let newHeight = imageView.frame.width / ratio
         imageHeightConstraint.constant = newHeight
+        imageView.isUserInteractionEnabled = true
+        if supplementaryView == nil {
+            supplementaryView = UtilityFuncs.setImageSupplementaryView(for: imageView)
+        }
+        setImageSaveListener()
         view.layoutIfNeeded()
     }
     
-    private func details(from name: String, _ time: String, _ domain: String) -> String {
-        "u/\(name) • \(time) • \(domain)"
+    private func setImageSaveListener() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(tryToSaveWithAnimation))
+        doubleTap.numberOfTapsRequired = 2
+        imageView.addGestureRecognizer(doubleTap)
+    }
+    // Only save (not delete) when double tapped.
+    @objc private func tryToSaveWithAnimation() {
+        guard let post = post else { return }
+        if !post.saved { saveWithAnimation(post) }
+    }
+    
+    private func saveWithAnimation(_ post: Post) {
+        if supplementaryView == nil {
+            supplementaryView = UtilityFuncs.setImageSupplementaryView(for: imageView)
+        }
+        supplementaryView?.alpha = 1.0
+        UIView.animate(
+            withDuration: Constants.bigBookmarkAnimationDuration,
+            delay: 0,
+            usingSpringWithDamping: Constants.bigBookmarkSpringDamping,
+            initialSpringVelocity: Constants.initialSpringVelocity
+        ) {
+            self.supplementaryView?.transform = CGAffineTransform(
+                scaleX: Constants.bigBookmarkScale,
+                y: Constants.bigBookmarkScale
+            )
+        } completion: { _ in
+            self.supplementaryView?.alpha = 0.0
+            self.supplementaryView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.postsProvider.save(post)
+            self.post?.saved.toggle()
+            self.display(self.post)
+        }
     }
 }

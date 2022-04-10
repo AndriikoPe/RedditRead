@@ -14,6 +14,8 @@ class PostTableViewCell: UITableViewCell {
     private var post: Post?
     private var url: URL? { post?.url }
     
+    private var supplementaryView: UIView?
+    
     // MARK: - Outlets.
     
     @IBOutlet private weak var detailsLabel: UILabel!
@@ -44,7 +46,7 @@ class PostTableViewCell: UITableViewCell {
         DispatchQueue.main.async {
             self.setImage(using: post.imageUrl)
             
-            self.detailsLabel.text = self
+            self.detailsLabel.text = UtilityFuncs
                 .details(from: post.author, UtilityFuncs.convertToNice(post.time), post.domain)
             self.detailsLabel.sizeToFit()
             
@@ -66,16 +68,51 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Double tap save animation setup.
+    
     private func layoutImage() {
         guard let image = postImageView.image else { return }
         let ratio = image.size.width / image.size.height
         let newHeight = postImageView.frame.width / ratio
+        postImageView.isUserInteractionEnabled = true
         postImageHeightConstraint.constant = newHeight
+        if supplementaryView == nil {
+            supplementaryView = UtilityFuncs.setImageSupplementaryView(for: postImageView)
+        }
+        setImageSaveListener()
     }
     
+    private func setImageSaveListener() {
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(tryToSaveWithAnimation))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.delaysTouchesBegan = true
+        postImageView.addGestureRecognizer(doubleTap)
+    }
+    // Only save (not delete) when double tapped.
+    @objc private func tryToSaveWithAnimation() {
+        guard let post = post else { return }
+        if !post.saved { saveWithAnimation(post) }
+    }
     
-    private func details(from name: String, _ time: String, _ domain: String) -> String {
-        "u/\(name) • \(time) • \(domain)"
+    private func saveWithAnimation(_ post: Post) {
+        if supplementaryView == nil {
+            supplementaryView = UtilityFuncs.setImageSupplementaryView(for: postImageView)
+        }
+        supplementaryView?.alpha = 1.0
+        UIView.animate(withDuration: Constants.bigBookmarkAnimationDuration,
+                       delay: 0,
+                       usingSpringWithDamping: Constants.bigBookmarkSpringDamping,
+                       initialSpringVelocity: Constants.initialSpringVelocity
+        ) {
+            self.supplementaryView?.transform = CGAffineTransform(
+                scaleX: Constants.bigBookmarkScale,
+                y: Constants.bigBookmarkScale
+            )
+        } completion: { _ in
+            self.supplementaryView?.alpha = 0.0
+            self.supplementaryView?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.delegate?.save(post)
+        }
     }
     
     private func setImage(using url: URL?) {
