@@ -46,7 +46,7 @@ struct UtilityFuncs {
     static func details(from name: String, _ time: String, _ domain: String) -> String {
         "u/\(name) • \(time) • \(domain)"
     }
-    
+    // MARK: - Image "big bookmark" supplementary view.
     static func setImageSupplementaryView(for imageView: UIImageView) -> UIView {
         imageView.subviews.forEach { $0.removeFromSuperview() }
         let supplementaryView = UIView()

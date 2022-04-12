@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PostCellDelegate {
+protocol PostCellDelegate: AnyObject {
     func share(_ url: URL)
     func save(_ post: Post)
 }

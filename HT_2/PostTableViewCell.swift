@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class PostTableViewCell: UITableViewCell {
-    var delegate: PostCellDelegate?
+    weak var delegate: PostCellDelegate?
     
     private var post: Post?
     private var url: URL? { post?.url }
