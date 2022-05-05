@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SwiftUI
 
 class PostDetailsViewController: UIViewController {
     // MARK: - Data.
@@ -27,6 +28,8 @@ class PostDetailsViewController: UIViewController {
     
     @IBOutlet private weak var imageHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var commentsContainerView: UIView!
+    
     // MARK: - Actions.
     
     @IBAction private func shareTapped(_ sender: UIButton) {
@@ -45,6 +48,7 @@ class PostDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCommentsView()
         display(post)
     }
     
@@ -133,5 +137,23 @@ class PostDetailsViewController: UIViewController {
             self.post?.saved.toggle()
             self.display(self.post)
         }
+    }
+    
+    // MARK: - Comments.
+    
+    private func loadCommentsView() {
+        let hostingVC = UIHostingController(
+            rootView: CommentsList()
+                .environmentObject(CommentsVM())
+        )
+        self.addChild(hostingVC)
+        self.commentsContainerView.addSubview(hostingVC.view)
+        hostingVC.didMove(toParent: self)
+        
+        hostingVC.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingVC.view.topAnchor.constraint(equalTo: commentsContainerView.topAnchor).isActive = true
+        hostingVC.view.trailingAnchor.constraint(equalTo: commentsContainerView.trailingAnchor).isActive = true
+        hostingVC.view.leadingAnchor.constraint(equalTo: commentsContainerView.leadingAnchor).isActive = true
+        hostingVC.view.bottomAnchor.constraint(equalTo: commentsContainerView.bottomAnchor).isActive = true
     }
 }

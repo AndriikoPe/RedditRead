@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZU-QQ-TrV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="381"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-WM-UkT" userLabel="DetailsStack">
-                                        <rect key="frame" x="8" y="160" width="398" height="31"/>
+                                        <rect key="frame" x="8" y="0.0" width="398" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="author • created • domain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uE-LK-7ef" userLabel="DetailsLabel">
                                                 <rect key="frame" x="0.0" y="0.0" width="146.5" height="31"/>
@@ -40,20 +40,20 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="z1F-gj-LSB" userLabel="RatingStack">
-                                        <rect key="frame" x="8" y="545" width="398" height="31"/>
+                                        <rect key="frame" x="8" y="274.5" width="398" height="106.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJ2-FB-u56" userLabel="RatingButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="31"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="68" height="106.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="arrow.up" catalog="system" title="0.0" imagePadding="5"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-wM-5eg" userLabel="CommentsButton">
-                                                <rect key="frame" x="153.5" y="0.0" width="72.5" height="31"/>
+                                                <rect key="frame" x="153.5" y="0.0" width="72.5" height="106.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title="0.0" imagePadding="5"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPJ-CM-LgA" userLabel="ShareButton">
-                                                <rect key="frame" x="311" y="0.0" width="87" height="31"/>
+                                                <rect key="frame" x="311" y="0.0" width="87" height="106.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system" title="Share" imagePadding="5"/>
                                                 <connections>
@@ -64,13 +64,13 @@
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oGC-FI-VvC">
-                                        <rect key="frame" x="0.0" y="237" width="414" height="300"/>
+                                        <rect key="frame" x="0.0" y="114.5" width="414" height="152"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="999" constant="300" id="Pcd-0J-uQx"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WDa-dg-JkQ" userLabel="DescriptionLabel">
-                                        <rect key="frame" x="20" y="199" width="374" height="30"/>
+                                        <rect key="frame" x="20" y="39" width="374" height="67.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -78,7 +78,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="b7l-WM-UkT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vZU-QQ-TrV" secondAttribute="top" constant="20" symbolic="YES" id="99I-Jb-SOq"/>
+                                    <constraint firstItem="b7l-WM-UkT" firstAttribute="top" secondItem="vZU-QQ-TrV" secondAttribute="top" id="99I-Jb-SOq"/>
                                     <constraint firstItem="oGC-FI-VvC" firstAttribute="centerX" secondItem="vZU-QQ-TrV" secondAttribute="centerX" id="Coz-W8-1t5"/>
                                     <constraint firstAttribute="trailing" secondItem="WDa-dg-JkQ" secondAttribute="trailing" constant="20" symbolic="YES" id="N6B-4y-Adj"/>
                                     <constraint firstAttribute="trailing" secondItem="z1F-gj-LSB" secondAttribute="trailing" constant="8" id="Q5M-Rk-a6b"/>
@@ -87,7 +87,7 @@
                                     <constraint firstAttribute="trailing" secondItem="b7l-WM-UkT" secondAttribute="trailing" constant="8" id="gL7-Gh-Gcz"/>
                                     <constraint firstItem="z1F-gj-LSB" firstAttribute="top" secondItem="oGC-FI-VvC" secondAttribute="bottom" constant="8" id="i6y-t8-6YB"/>
                                     <constraint firstItem="WDa-dg-JkQ" firstAttribute="leading" secondItem="vZU-QQ-TrV" secondAttribute="leading" constant="20" symbolic="YES" id="skN-Yq-Hkm"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="z1F-gj-LSB" secondAttribute="bottom" id="tl8-sr-cPP"/>
+                                    <constraint firstAttribute="bottom" secondItem="z1F-gj-LSB" secondAttribute="bottom" id="tl8-sr-cPP"/>
                                     <constraint firstItem="b7l-WM-UkT" firstAttribute="leading" secondItem="vZU-QQ-TrV" secondAttribute="leading" constant="8" id="vmG-to-BsU"/>
                                     <constraint firstItem="oGC-FI-VvC" firstAttribute="centerY" secondItem="vZU-QQ-TrV" secondAttribute="centerY" id="wd2-bM-qIm"/>
                                     <constraint firstItem="WDa-dg-JkQ" firstAttribute="top" secondItem="b7l-WM-UkT" secondAttribute="bottom" constant="8" symbolic="YES" id="xtk-AD-EEo"/>
@@ -95,20 +95,28 @@
                                     <constraint firstItem="oGC-FI-VvC" firstAttribute="leading" secondItem="vZU-QQ-TrV" secondAttribute="leading" priority="999" id="yYB-mk-jQ3"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KT-C3-Tfi" userLabel="CommentsContainerView">
+                                <rect key="frame" x="0.0" y="481" width="414" height="381"/>
+                            </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2KT-C3-Tfi" firstAttribute="height" secondItem="vZU-QQ-TrV" secondAttribute="height" id="245-c1-wlM"/>
+                            <constraint firstItem="2KT-C3-Tfi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="C2T-Wa-nEY"/>
                             <constraint firstItem="vZU-QQ-TrV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JXH-Zj-qpP"/>
                             <constraint firstItem="vZU-QQ-TrV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q2k-cm-P8M"/>
+                            <constraint firstItem="2KT-C3-Tfi" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Qmt-KK-wGz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vZU-QQ-TrV" secondAttribute="trailing" id="cHt-wm-1ec"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vZU-QQ-TrV" secondAttribute="bottom" id="pWF-n6-oIB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2KT-C3-Tfi" secondAttribute="trailing" id="gmO-Lz-Hle"/>
+                            <constraint firstItem="2KT-C3-Tfi" firstAttribute="top" secondItem="vZU-QQ-TrV" secondAttribute="bottom" constant="12" id="t7X-Fe-oGZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LgH-Q9-GP8"/>
                     <connections>
                         <outlet property="bookmarkButton" destination="qTE-vi-BQi" id="WZ1-7Z-rDc"/>
                         <outlet property="commentsButton" destination="7QI-wM-5eg" id="84J-su-RGo"/>
+                        <outlet property="commentsContainerView" destination="2KT-C3-Tfi" id="JPc-hu-UgU"/>
                         <outlet property="descriptionLabel" destination="WDa-dg-JkQ" id="bOp-lJ-mvg"/>
                         <outlet property="detailsLabel" destination="2uE-LK-7ef" id="JRZ-EM-AGL"/>
                         <outlet property="imageHeightConstraint" destination="Pcd-0J-uQx" id="Bi1-Lg-RvJ"/>
@@ -120,7 +128,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="WTc-sl-SGq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2855" y="65"/>
+            <point key="canvasLocation" x="2853.6231884057975" y="64.955357142857139"/>
         </scene>
         <!--Post List Table View Controller-->
         <scene sceneID="OWF-RW-zKA">

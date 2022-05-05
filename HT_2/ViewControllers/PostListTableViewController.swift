@@ -13,7 +13,11 @@ class PostListTableViewController: UITableViewController {
     private let subreddit = "apple"
     
     private var postsProvider = PostsProvider.shared
-    private var posts: [Post] { postsProvider.posts.filter(postsFilter) }
+    
+    private var posts: [Post] {
+        postsProvider.savedOnly ? postsProvider.posts.filter(postsFilter) : postsProvider.posts
+    }
+    
     private var after: String? { posts.last?.name }
     
     private var loadingData = false

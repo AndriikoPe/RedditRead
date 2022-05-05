@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/pelman/Developer/iOS2.2/HT_5/HT_2/PostView.swift">
+   </FileRef>
+   <FileRef
       location = "group:HT_2.xcodeproj">
    </FileRef>
    <FileRef
