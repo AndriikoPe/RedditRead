@@ -17,32 +17,43 @@ class PostTableViewCell: UITableViewCell {
     private var supplementaryView: UIView?
     
     // MARK: - Outlets.
-    
-    @IBOutlet private weak var detailsLabel: UILabel!
-    @IBOutlet private weak var postImageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var postImageView: UIImageView!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var bookmarkButton: UIButton!
-    @IBOutlet private weak var ratingButton: UIButton!
-    @IBOutlet private weak var commentsButton: UIButton!
-    @IBOutlet private weak var shareButton: UIButton!
+    @IBOutlet private weak var postView: PostView!
+    private weak var detailsLabel: UILabel! { postView.detailsLabel }
+    private weak var postImageHeightConstraint: NSLayoutConstraint! { postView.postImageHeightConstraint }
+    private weak var postImageView: UIImageView! { postView.postImageView }
+    private weak var titleLabel: UILabel! { postView.titleLabel }
+    private weak var bookmarkButton: UIButton! { postView.bookmarkButton }
+    private weak var ratingButton: UIButton! { postView.ratingButton }
+    private weak var commentsButton: UIButton! { postView.commentsButton }
+    private weak var shareButton: UIButton! { postView.shareButton }
     
     // MARK: - Actions.
     
-    @IBAction private func share(_ sender: UIButton) {
+    private func share(_ sender: UIButton) {
         guard let url = url else { return }
         delegate?.share(url)
     }
     
-    @IBAction private func saveButtonTapped(_ sender: UIButton) {
+    private func saveButtonTapped(_ sender: UIButton) {
         guard let post = post else { return }
         delegate?.save(post)
+    }
+    
+    // MARK: - Selection.
+    // Manually highlight when selected.
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        self.postView.postInfoView.backgroundColor = highlighted ? .systemGray4 : .systemBackground
     }
     
     // MARK: - Configurations.
     
     func configure(with post: Post) {
         self.post = post
+
+        postView.shareButtonAction = share
+        postView.bookmarkButtonAction = saveButtonTapped
+        
         DispatchQueue.main.async {
             self.setImage(using: post.imageUrl)
             

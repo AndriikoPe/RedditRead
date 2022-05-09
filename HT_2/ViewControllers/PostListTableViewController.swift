@@ -125,6 +125,7 @@ class PostListTableViewController: UITableViewController {
               let index = tableView.indexPathForSelectedRow?.row
         else { return }
         destinationVC.post = posts[index]
+        destinationVC.subreddit = subreddit
     }
     
     // MARK: - Pagination.

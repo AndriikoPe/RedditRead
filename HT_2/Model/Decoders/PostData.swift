@@ -17,10 +17,11 @@ struct PostData: Decodable {
     let numComments: Int
     let created: Double
     let name: String
+    let id: String
     let url: URL
 
     enum CodingKeys: String, CodingKey {
-        case thumbnail, ups, downs, title, domain, author, created, name, url
+        case thumbnail, ups, downs, title, domain, author, created, name, url, id
         case numComments = "num_comments"
         case preview
         
@@ -40,6 +41,7 @@ struct PostData: Decodable {
         created = try dataContainer.decode(Double.self, forKey: .created)
         name = try dataContainer.decode(String.self, forKey: .name)
         url = try dataContainer.decode(URL.self, forKey: .url)
+        id = try dataContainer.decode(String.self, forKey: .id)
         if dataContainer.allKeys.contains(where: { $0 == .preview }) {
             let preview = try dataContainer.decode(ImageURL.self, forKey: .preview)
             stringURL = preview.image?.source.url

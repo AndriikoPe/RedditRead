@@ -15,12 +15,17 @@ class CommentsVM: ObservableObject {
     private(set) var loadingMore = false
 
     private let reddit = "https://www.reddit.com/"
-    private let limit = 15
     private let depth = 3
-    private let subreddit = "Music"
     
-    init() {
-        fetchComments(limit: limit)
+    private let subreddit: String
+    private let postId: String
+    private let limit: Int
+    
+    init(subreddit: String, id: String, _ limit: Int = 15) {
+        self.limit = limit
+        self.postId = id
+        self.subreddit = subreddit
+        fetchComments()
     }
     
     public func tryToLoadMore(currentItem: CommentModel) {
@@ -34,9 +39,7 @@ class CommentsVM: ObservableObject {
         !more.isEmpty && currentItem.id == comments.last?.id
     }
     
-    private func fetchComments(subreddit: String = "Music",
-                               postId: String = "u5jfbi",
-                               limit: Int = 20) {
+    private func fetchComments() {
         guard let url = URL(string: "\(reddit)r/\(subreddit)/comments/\(postId).json?limit=\(limit)&depth=\(depth)")
         else { return }
         loadData(from: url) { (result: Result<[CommentDataList], Error>) in

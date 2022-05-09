@@ -13,32 +13,35 @@ class PostDetailsViewController: UIViewController {
     // MARK: - Data.
     var postsProvider = PostsProvider.shared
     var post: Post?
+    var subreddit: String?
+    
     private var supplementaryView: UIView?
     
     // MARK: - Outlets.
-    @IBOutlet private weak var detailsLabel: UILabel!
-    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var postView: PostView!
+    private weak var detailsLabel: UILabel! { postView.detailsLabel }
+    private weak var descriptionLabel: UILabel! { postView.titleLabel }
     
-    @IBOutlet private weak var bookmarkButton: UIButton!
-    @IBOutlet private weak var shareButton: UIButton!
+    private weak var bookmarkButton: UIButton! { postView.bookmarkButton }
+    private weak var shareButton: UIButton! { postView.shareButton }
     
-    @IBOutlet private weak var commentsButton: UIButton!
-    @IBOutlet private weak var ratingButton: UIButton!
-    @IBOutlet private weak var imageView: UIImageView!
+    private weak var commentsButton: UIButton! { postView.commentsButton }
+    private weak var ratingButton: UIButton! { postView.ratingButton }
+    private weak var imageView: UIImageView! { postView.postImageView }
     
-    @IBOutlet private weak var imageHeightConstraint: NSLayoutConstraint!
+    private weak var imageHeightConstraint: NSLayoutConstraint! { postView.postImageHeightConstraint }
     
     @IBOutlet private weak var commentsContainerView: UIView!
     
     // MARK: - Actions.
     
-    @IBAction private func shareTapped(_ sender: UIButton) {
+    private func shareTapped(_ sender: UIButton) {
         guard let url = post?.url else { return }
         let avc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(avc, animated: true)
     }
     
-    @IBAction func saveButtonTapped(_ sender: UIButton) {
+    private func saveButtonTapped(_ sender: UIButton) {
         if let post = post { postsProvider.save(post) }
         self.post?.saved.toggle()
         display(post)
@@ -48,6 +51,8 @@ class PostDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        postView.shareButtonAction = shareTapped
+        postView.bookmarkButtonAction = saveButtonTapped
         loadCommentsView()
         display(post)
     }
@@ -139,12 +144,15 @@ class PostDetailsViewController: UIViewController {
         }
     }
     
+    
+    
     // MARK: - Comments.
     
     private func loadCommentsView() {
+        guard let postId = post?.id, let subreddit = subreddit else { return }
         let hostingVC = UIHostingController(
             rootView: CommentsList()
-                .environmentObject(CommentsVM())
+                .environmentObject(CommentsVM(subreddit: subreddit, id: postId))
         )
         self.addChild(hostingVC)
         self.commentsContainerView.addSubview(hostingVC.view)

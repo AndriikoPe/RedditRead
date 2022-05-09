@@ -10,7 +10,11 @@ import UIKit
 class PostView: UIView {
     let kCONTENT_XIB_NAME = "PostView"
     
+    // MARK: - Outlets.
+    
     @IBOutlet var contentView: UIView!
+    
+    @IBOutlet var postInfoView: UIView!
     @IBOutlet var detailsLabel: UILabel!
     @IBOutlet var postImageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postImageView: UIImageView!
@@ -19,6 +23,18 @@ class PostView: UIView {
     @IBOutlet var ratingButton: UIButton!
     @IBOutlet var commentsButton: UIButton!
     @IBOutlet var shareButton: UIButton!
+    
+    // MARK: - Actions.
+    
+    @IBAction private func bookmarkButtonTapped(_ sender: UIButton) {
+        bookmarkButtonAction?(sender)
+    }
+    
+    @IBAction private func shareButtonTapped(_ sender: UIButton) {
+        shareButtonAction?(sender)
+    }
+    
+    // MARK: - Inits.
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +50,11 @@ class PostView: UIView {
         Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self, options: nil)
         contentView.fixInView(self)
     }
+    
+    // MARK: - Intents.
+    
+    var bookmarkButtonAction: ((UIButton) -> Void)?
+    var shareButtonAction: ((UIButton) -> Void)?
 }
 
 extension UIView {

@@ -36,10 +36,3 @@ struct CommentsList: View {
             .padding(.vertical, 10)
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentsList()
-            .environmentObject(CommentsVM())
-    }
-}

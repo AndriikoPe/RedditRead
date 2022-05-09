@@ -17,6 +17,7 @@ struct Post: Hashable, Codable {
     let createdTime: TimeInterval
     let comments: Int
     let name: String
+    let id: String
     let url: URL
     
     var saved: Bool
@@ -41,6 +42,7 @@ struct Post: Hashable, Codable {
         self.comments = managedObject.comments
         self.name = managedObject.name
         self.saved = true
+        self.id = managedObject.id
     }
     
     init?(from postData: PostData?) {
@@ -55,6 +57,7 @@ struct Post: Hashable, Codable {
         self.comments = data.numComments
         self.name = data.name
         self.url = data.url
+        self.id = data.id
     }
     
     private static func format(url: String) -> URL? {
@@ -78,6 +81,7 @@ final class PostObject: Object {
     @objc dynamic var comments: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var url: String = ""
+    @objc dynamic var id: String = ""
     
     fileprivate convenience init(with post: Post) {
         self.init()
@@ -90,6 +94,7 @@ final class PostObject: Object {
         self.comments = post.comments
         self.name = post.name
         self.url = post.url.absoluteString
+        self.id = post.id
     }
 }
 
