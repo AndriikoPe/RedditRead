@@ -11,7 +11,6 @@ struct CommentsList: View {
     @EnvironmentObject var viewModel: CommentsVM
     
     var body: some View {
-        // TODO: - Implement paging.
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 0) {
