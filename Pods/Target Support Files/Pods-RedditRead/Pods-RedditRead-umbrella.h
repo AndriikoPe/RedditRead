@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_HT_2VersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_HT_2VersionString[];
+FOUNDATION_EXPORT double Pods_RedditReadVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_RedditReadVersionString[];
 

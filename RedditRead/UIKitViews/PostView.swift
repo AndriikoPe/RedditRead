@@ -1,6 +1,6 @@
 //
 //  PostView.swift
-//  
+//
 //
 //  Created by Пермяков Андрей on 05.05.2022.
 //
@@ -14,15 +14,15 @@ class PostView: UIView {
     
     @IBOutlet var contentView: UIView!
     
-    @IBOutlet var postInfoView: UIView!
-    @IBOutlet var detailsLabel: UILabel!
-    @IBOutlet var postImageHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var postImageView: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var bookmarkButton: UIButton!
-    @IBOutlet var ratingButton: UIButton!
-    @IBOutlet var commentsButton: UIButton!
-    @IBOutlet var shareButton: UIButton!
+    @IBOutlet weak var postInfoView: UIView!
+    @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var postImageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bookmarkButton: UIButton!
+    @IBOutlet weak var ratingButton: UIButton!
+    @IBOutlet weak var commentsButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     // MARK: - Actions.
     

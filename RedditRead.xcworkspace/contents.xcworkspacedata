@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/pelman/Developer/iOS2.2/HT_5/HT_2/PostView.swift">
-   </FileRef>
-   <FileRef
-      location = "group:HT_2.xcodeproj">
+      location = "group:RedditRead.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
